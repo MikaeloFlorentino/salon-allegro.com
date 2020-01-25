@@ -130,8 +130,10 @@ die("Revelando secretos");
 		<!-- Header -->
 			<section id="header">
 				<header>
-					<h1>Salon Allegro</h1>
-					<p>Tu lugar con sabor a hogar</p>
+					<font color="#ffffff" background-color="#ffffff">
+						<h1>Salon Allegro</h1>
+						<p>Tu lugar con sabor a hogar</p>
+					</font>
 				</header>
 				<footer>
 					<a href="#banner" class="button style2 scrolly-middle">Conoce mas</a>
@@ -165,19 +167,19 @@ die("Revelando secretos");
 						<h2>Estamos<br />
 						cerca de ti</h2>
 					</header>
-					<p>Nos pueden encontrar en: Avenida Soledad #100, San Luis Potosí.</p>
+					<p>Nos pueden encontrar en: Av Soledad #100, Fraccionamiento Valle de Santiago, Soledad de Graciano Sanchez, San Luis Potosí</p>
 				</div>
 			</article>
 
 		<!-- Feature 2 -->
 			<article class="container box style1 left">
-				<a href="#" class="image fit"><img src="images/pic02.jpg" alt="" /></a>
+				<a href="#" class="image fit"><img src="images/allegro.jpg" alt="" /></a>
 				<div class="inner">
 					<header>
 						<h2>Cabemos<br />
 						Todos</h2>
 					</header>
-					<p>Con cpacidad para 100 personas, para que puedan venir toda la familia</p>
+					<p>Con capacidad para 100 personas, para que puedan venir toda la familia</p>
 				</div>
 			</article>
 
