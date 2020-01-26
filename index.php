@@ -5,25 +5,25 @@ $re=$_POST['g-recaptcha-response'];
 $secret = "6Lf91tAUAAAAAKZmqGjjw9n2JDxvKx1cdS8Biav6";
  
 if (isset($_POST['g-recaptcha-response'])) {
-$captcha = $_POST['g-recaptcha-response']; 
-$url = 'https://www.google.com/recaptcha/api/siteverify';
-$data = array(
-'secret' => $secret,
-'response' => $captcha,
-'remoteip' => $_SERVER['REMOTE_ADDR']
-);
- 
-$curlConfig = array(
-CURLOPT_URL => $url,
-CURLOPT_POST => true,
-CURLOPT_RETURNTRANSFER => true,
-CURLOPT_POSTFIELDS => $data
-);
- 
-$ch = curl_init();
-curl_setopt_array($ch, $curlConfig);
-$response = curl_exec($ch);
-curl_close($ch);
+	$captcha = $_POST['g-recaptcha-response']; 
+	$url = 'https://www.google.com/recaptcha/api/siteverify';
+	$data = array(
+		'secret' => $secret,
+		'response' => $captcha,
+		'remoteip' => $_SERVER['REMOTE_ADDR']
+	);
+	 
+	$curlConfig = array(
+		CURLOPT_URL => $url,
+		CURLOPT_POST => true,
+		CURLOPT_RETURNTRANSFER => true,
+		CURLOPT_POSTFIELDS => $data
+	);
+	 
+	$ch = curl_init();
+	curl_setopt_array($ch, $curlConfig);
+	$response = curl_exec($ch);
+	curl_close($ch);
 }
  
 $jsonResponse = json_decode($response);
@@ -47,7 +47,7 @@ if($CUSTOM!=""){
 			$email  = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
 			$mensaje = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
 
-		    	$query = 'insert into public.mensajes (dominio, ip, nombre, celular, correo, mensaje) values';
+		    $query = 'insert into public.mensajes (dominio, ip, nombre, celular, correo, mensaje) values';
 
 			$query.= '(\'salon-allegro.com\', \''.$_SERVER['REMOTE_ADDR'].'\', ';
 			$query.= '\''.$nombre.'\', \''.$celular.'\', ';
@@ -57,8 +57,8 @@ if($CUSTOM!=""){
 //		echo "hola: " . $email. "_<br>";
 	  //  	die( $query);
 	     
-		pg_query($dbconn, $query);
-	     }
+			pg_query($dbconn, $query);
+	    }
     	// 
 		pg_close($dbconn);
 	    
@@ -87,59 +87,6 @@ if($CUSTOM!=""){
     // Close connection
     pg_close($dbconn);
 }
-/*
-$CUSTOM=$_POST['custId'];
-if($CUSTOM!=""){
-#String a="6Lf91tAUAAAAAF1qWaRxRc8GYto0bsnDYwdIufYn";
-#String b="6Lf91tAUAAAAAKZmqGjjw9n2JDxvKx1cdS8Biav6";
- 
-die("Revelando secretos");
-	$titulo="Nueva Solicitud ".$CUSTOM;
-	$NAME=$_POST['name'];
-    $MAIL=$_POST['email'];
-    $MESSAGE=$_POST['message'];
-	$para  = 'contacto@quierosermason.com' . ', '; // atención a la coma
-	$para .= $MAIL;
-   $cuerpo='
-    Hola contacto<br>
-    <br>
-    Se a recibido una nueva solicitu de informes, el interesado es: <b>'.$NAME.'</b> quien tiene un<br>
-    correo: <i>'.$MAIL.'</i><br>
-    <br>
-    -------<br>'.
-    $MESSAGE;
-
-    // Para enviar un correo HTML, debe establecerse la cabecera Content-type
-    $cabeceras  = 'MIME-Version: 1.0' . "\r\n";
-    $cabeceras .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-    $cabeceras .= 'To: '.$NAME.' <'.$MAIL.'>, Contacto <contacto@quierosermason.com>' . "\r\n";
-    $cabeceras .= 'Reply-To: contacto@quierosermason.com' . "\r\n";
-    $cabeceras .= 'From: Contacto <contacto@quierosermason.com>' . "\r\n";
-
-#    mail($para, $titulo, $cuerpo, $cabeceras, "contacto@quierosermason.com");
-#    die($CUSTOM.'<br>'.$para.'<br>'.$título.'<br>'.$cuerpo.'<br>'.$cabeceras);
-
-#	die("Si");
-}else{
-    $conn_string = "host=localhost port=5432 dbname=visitas user=postgres ";
-     
-    // establecemos una conexion con el servidor postgresSQL
-    $dbconn = pg_connect($conn_string);
-     
-    // Revisamos el estado de la conexion en caso de errores. 
-    if(!$dbconn) {
-    echo "Error: No se ha podido conectar a la base de datos\n";
-    } else {
-     $query='insert into visitas_dominio (pagina, ip, dominio) values (\'index.php\', \''.$_SERVER['REMOTE_ADDR'].'\',\'salon-allegro.com\')';
-
-#    echo $query;
-     pg_query($dbconn, $query);
-    }
-     
-    // Close connection
-    pg_close($dbconn);
-
-}*/
 ?>
 
 <html>
