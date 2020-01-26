@@ -41,20 +41,17 @@
 		
 			<article class="container box style3">
 				<section>
-					<header>
-						<h3>Table</h3>
-					</header>
 					<div class="table-wrapper">
 						<table>
 							<tbody>
 								<tr>
-									<td>nombre</td>
+									<th>nombre</th>
 									<td>
 									<?php
 										echo htmlspecialchars($row[1], ENT_QUOTES, 'UTF-8');
 									?>
 									</td>
-									<td>fecha</td>
+									<th>fecha</th>
 									<td>
 									<?php
 										echo htmlspecialchars($row[1], ENT_QUOTES, 'UTF-8');
@@ -63,13 +60,13 @@
 								</tr>
 								
 								<tr>
-									<td>correo</td>
+									<th>correo</th>
 									<td>
 									<?php
 										echo htmlspecialchars($row[3], ENT_QUOTES, 'UTF-8');
 									?>
 									</td>
-									<td>celular</td>
+									<th>celular</th>
 									<td>
 									<?php
 										echo htmlspecialchars($row[2], ENT_QUOTES, 'UTF-8');
@@ -83,11 +80,11 @@
 								</tr>
 
 								<tr>
-									<th colspan="4">
+									<td colspan="4">
 									<?php
 										echo htmlspecialchars($row[4], ENT_QUOTES, 'UTF-8');
 									?>
-									</th>
+									</td>
 								</tr>
 							</tbody>
 						</table>
