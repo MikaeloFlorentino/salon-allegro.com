@@ -11,9 +11,9 @@
 
 			$query = 'SELECT id_mensajes,  (fecha - interval \'6 hour\') as dia, nombre, ';
 			$query.= 'celular, correo, mensaje, leido FROM public.mensajes ';
-			$query.= 'order by fecha desc'
-			$result = pg_query($conn, "SELECT author, email FROM authors");
-			
+			$query.= 'order by fecha desc';
+                        $result = pg_query( $query);
+
 		}
     	// 
 		pg_close($dbconn);
@@ -33,7 +33,6 @@
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
         <script src="https://www.google.com/recaptcha/api.js?" async defer></script>
-</script>
 
 	</head>
 	<body class="is-preload">
@@ -58,13 +57,12 @@
 							</thead>
 							<tbody>
 							<?php
-
 								while ($row = pg_fetch_row($result)) {
 									echo "<tr>";
-									echo "<td>" . htmlspecialchars($row[0], ENT_QUOTES, 'UTF-8'). "</td>";
+    echo "<td><a href='mensaje.php?id=".$row[0]."' target='tuArchivo' onclick=\"window.open(this.href, this.target, ' width=1000, height=400, menubar=no');return false;\">". $row[0]."</a> </td>";
 									echo "<td>" . htmlspecialchars($row[2], ENT_QUOTES, 'UTF-8'). "</td>";
 									echo "<td>" . htmlspecialchars($row[1], ENT_QUOTES, 'UTF-8'). "</td>";
-									echo "<td>" . htmlspecialchars($row[7], ENT_QUOTES, 'UTF-8'). "</td>";
+									echo "<td>" . htmlspecialchars($row[6], ENT_QUOTES, 'UTF-8'). "</td>";
 									echo "</tr>";
 								}
 							?>
@@ -74,44 +72,9 @@
 							</tbody>
 						</table>
 					</div>
-				</section>
-				<section>
-					<header>
-						<h3>Form</h3>
-					</header>
-					<form method="post" action="#">
-						<div class="row">
-							<div class="col-6 col-12-mobile">
-								<input class="text" type="text" name="name" id="name" value="" placeholder="John Doe" />
-							</div>
-							<div class="col-6 col-12-mobile">
-								<input class="text" type="text" name="email" id="email" value="" placeholder="johndoe@domain.tld" />
-							</div>
-							<div class="col-12">
-								<select name="department" id="department">
-									<option value="">Choose a department</option>
-									<option value="1">Manufacturing</option>
-									<option value="2">Administration</option>
-									<option value="3">Support</option>
-								</select>
-							</div>
-							<div class="col-12">
-								<input class="text" type="text" name="subject" id="subject" value="" placeholder="Enter your subject" />
-							</div>
-							<div class="col-12">
-								<textarea name="message" id="message" placeholder="Enter your message"></textarea>
-							</div>
-
-							<div class="col-12">
-								<ul class="actions">
-									<li><input type="submit" value="Submit" /></li>
-									<li><input type="reset" class="style3" value="Clear Form" /></li>
-								</ul>
-							</div>
-						</div>
-					</form>
-				</section>
+                </section>
 			</article>
+
 		<section id="footer">
 			<ul class="icons">
 				<!-- <li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li> -->
