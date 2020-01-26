@@ -54,7 +54,7 @@
 									<th>fecha</th>
 									<td>
 									<?php
-										echo htmlspecialchars($row[1], ENT_QUOTES, 'UTF-8');
+										echo htmlspecialchars($row[0], ENT_QUOTES, 'UTF-8');
 									?>
 									</td>
 								</tr>
