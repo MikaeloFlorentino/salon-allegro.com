@@ -38,7 +38,7 @@
 
 
 		<!-- Generic -->
-		
+		<section id="header">
 			<article class="container box style3">
 				<section>
 					<div class="table-wrapper">
@@ -91,6 +91,8 @@
 					</div>
                 </section>
 			</article>
+
+		</section>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
