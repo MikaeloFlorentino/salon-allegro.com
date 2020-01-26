@@ -32,11 +32,26 @@ $CUSTOM=$_POST['custId'];
 if($CUSTOM!=""){
 	if ($jsonResponse->success === true) {
 	 
-	// Si el código es correcto, seguimos procesando el formulario como siempre 
-		die("si");
-	 
+	 $conn_string = "host=localhost port=5432 dbname=visitas user=postgres ";
+     
+    // establecemos una conexion con el servidor postgresSQL
+    // $dbconn = pg_connect($conn_string);
+     
+    // Revisamos el estado de la conexion en caso de errores. 
+	    if(!$dbconn) {
+	    	echo "Error: No se ha podido conectar a la base de datos\n";
+	    } else {
+	    	$query = 'insert into public.mensajes (dominio, ip, nombre, celular, correo, mensaje) values';
+	    	$query.= '(\'salon-allegro.com\', \''.$_SERVER['REMOTE_ADDR'].'\', ';
+	    	$query.= '\'.$_POST['name'].\', \'.$_POST['celular'].\', \'.$_POST['email'].\', \'.$_POST['message'].\' )';
+
+	    	die( $query);
+	     //pg_query($dbconn, $query);
+	     }
+    	// pg_close($dbconn);
+	    
 	} else { 
-	 die("no");
+		die("no");
 	// Si el código no es válido, lanzamos mensaje de error al usuario 
 	 
 	}
