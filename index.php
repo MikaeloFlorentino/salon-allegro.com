@@ -32,24 +32,37 @@ $CUSTOM=$_POST['custId'];
 if($CUSTOM!=""){
 	if ($jsonResponse->success === true) {
 	 
-	 $conn_string = "host=localhost port=5432 dbname=visitas user=postgres ";
+		$conn_string = "host=localhost port=5432 dbname=visitas user=postgres ";
      
-    // establecemos una conexion con el servidor postgresSQL
-    // $dbconn = pg_connect($conn_string);
+		// establecemos una conexion con el servidor postgresSQL
+		$dbconn = pg_connect($conn_string);
      
-    // Revisamos el estado de la conexion en caso de errores. 
-	    if(!$dbconn) {
-	    	echo "Error: No se ha podido conectar a la base de datos\n";
-	    } else {
-	    	$query = 'insert into public.mensajes (dominio, ip, nombre, celular, correo, mensaje) values';
-	    	$query.= '(\'salon-allegro.com\', \''.$_SERVER['REMOTE_ADDR'].'\', ';
-	    	$query.= '\'.$_POST['name'].\', \'.$_POST['celular'].\', \'.$_POST['email'].\', \'.$_POST['message'].\' )';
+		// Revisamos el estado de la conexion en caso de errores. 
+		if(!$dbconn) {
+	    		echo "Error: No se ha podido conectar a la base de datos\n";
+		} else {
 
-	    	die( $query);
-	     //pg_query($dbconn, $query);
+			$nombre = filter_input(INPUT_POST, 'name', FILTER_SANITIZE_STRING);
+			$celular = filter_input(INPUT_POST, 'celular', FILTER_SANITIZE_STRING);
+			$email  = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_STRING);
+			$mensaje = filter_input(INPUT_POST, 'message', FILTER_SANITIZE_STRING);
+
+		    	$query = 'insert into public.mensajes (dominio, ip, nombre, celular, correo, mensaje) values';
+
+			$query.= '(\'salon-allegro.com\', \''.$_SERVER['REMOTE_ADDR'].'\', ';
+			$query.= '\''.$nombre.'\', \''.$celular.'\', ';
+			$query.= '\''.$email.'\', \''.$mensaje.'\' )';
+//	    	$query.= '\'.$_POST['name'].\', \'.$_POST['celular'].\', \'.$_POST['email'].\', \'.$_POST['message'].\' )';
+//		echo "hola: " . htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8'). "_<br>";
+//		echo "hola: " . $email. "_<br>";
+	  //  	die( $query);
+	     
+		pg_query($dbconn, $query);
 	     }
-    	// pg_close($dbconn);
+    	// 
+		pg_close($dbconn);
 	    
+//	
 	} else { 
 		die("no");
 	// Si el código no es válido, lanzamos mensaje de error al usuario 
@@ -132,6 +145,10 @@ die("Revelando secretos");
 <html>
 	<head>
 		<title>Salon Allegro</title>
+        <meta name="description" content="Pagina Oficial del Salon Allegro, para tus eventos en San Luis Potosi, ubicados por acceso norte">
+        <!-- Meta Keyword -->
+        <meta name="keywords" content="salon allegro, san luis potosi, mexico, salon de eventos, salon de fiestas, soledad de graciano sanches, mexico, pura fiesta">
+      
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -224,7 +241,7 @@ die("Revelando secretos");
 			<article class="container box style3">
 				<header>
 					<h2>Mandanos un mensaje</h2>
-					<p>Contactanos.</p>
+					<p>Contactanos ó mandanos un correo a:<br><b>hola@salon-allegro.com</b></p>
 				</header>
 				<form method="post" action="#">
 					<div class="row gtr-50">
